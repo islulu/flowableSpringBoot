@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: flowableSpringBoot
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/flowable_spring_boot?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: root
+    password: cjl14czx
+server:
+  port: 8080
+logging:
+  level:
+    org.springframework.boot.autoconfigure: INFO
+    #sql日志 打印至 控制台
+    com:
+      alu:
+        flowableSpringBoot:
+          mapper: debug
+flowable:
+  #关闭定时任务JOB
+  async-executor-activate: false
