@@ -21,14 +21,15 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "expense")
 public class ExpenseController {
+
+    @Autowired
+    private ProcessEngine processEngine;
+    @Autowired
+    private RepositoryService repositoryService;
     @Autowired
     private RuntimeService runtimeService;
     @Autowired
     private TaskService taskService;
-    @Autowired
-    private RepositoryService repositoryService;
-    @Autowired
-    private ProcessEngine processEngine;
 
     /***************此处为业务代码******************/
 
@@ -105,15 +106,15 @@ public class ExpenseController {
         ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
 
         //流程走完的不显示图
-//        if (pi == null) {
-//            return;
-//        }
+        if (pi == null) {
+            return;
+        }
         Task task = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
         //使用流程实例ID，查询正在执行的执行对象表，返回流程实例对象
-        String InstanceId = task.getProcessInstanceId();
+        String instanceId = task.getProcessInstanceId();
         List<Execution> executions = runtimeService
                 .createExecutionQuery()
-                .processInstanceId(InstanceId)
+                .processInstanceId(instanceId)
                 .list();
 
         //得到正在执行的Activity的Id
