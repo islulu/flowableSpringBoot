@@ -9,8 +9,7 @@ import org.flowable.image.ProcessDiagramGenerator;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "expense")
 public class ExpenseController {
     @Autowired
@@ -40,7 +39,7 @@ public class ExpenseController {
      * @param money     报销金额
      * @param descption 描述
      */
-    @RequestMapping(value = "add")
+    @PostMapping("add")
     @ResponseBody
     public String addExpense(String userId, Integer money, String descption) {
         //启动流程
