@@ -1,0 +1,1 @@
+create schema flowable_spring_boot collate utf8mb4_0900_ai_ci;
